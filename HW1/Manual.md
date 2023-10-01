@@ -255,3 +255,65 @@ public class Main {
     }
 }
 ```
+---------------------------Дополнение----------------------------------
+
+
+Попробуйте руками памл файл добавить так же отношение 0 .. 1 и т д . А так же на всякий оставляю пример.
+В этом примере показын синтаксис написания связей для для PlantUML,в том числе агрегация и композиция
+
+@startuml
+
+' Классы
+class Human {
++void ownCat(Cat)
+}
+
+class Cat {
++void meow()
+}
+
+class Dog {
++void bark()
+}
+
+class House {
++Room room
+}
+
+class Room {
++void description()
+}
+
+' Агрегация (Aggregation): Human может иметь ноль или более Cat, но не владеет ими.
+' Обозначается пустым ромбом на стороне "целого" (Human).
+Human "1" o-- "0.." Cat : owns
+
+' Композиция (Composition): House владеет одной или более Room.
+' Обозначается заполненным ромбом на стороне "целого" (House).
+House "1" -- "1.." Room : contains
+
+' Ассоциация (Association): Human может иметь ноль или одну Dog, и Dog может иметь ноль или одного хозяина (Human).
+' Обозначается простой линией.
+Human "0..1" -- "0..1" Dog : has <--> belongs to
+
+' Зависимость (Dependency): Например, какой-то метод в Human использует Room.
+' Обозначается пунктирной стрелкой.
+Human ..> Room : uses
+
+' Наследование (Inheritance) или обобщение (Generalization): Cat и Dog являются подклассами Animal.
+' Обозначается пустой стрелкой.
+class Animal {
++void breathe()
+}
+Animal <|-- Cat : is a
+Animal <|-- Dog : is a
+
+' Реализация интерфейса (Realization): Human реализует интерфейс Eatable.
+' Обозначается пунктирной линией с пустой стрелкой на конце.
+interface Eatable {
++void eat()
+}
+Eatable <|.. Human : implements
+
+@enduml
+```

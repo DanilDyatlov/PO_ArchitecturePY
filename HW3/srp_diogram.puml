@@ -1,0 +1,32 @@
+@startuml Duck
+
+class Animal {
+  - name: str
+  + __init__(name)
+}
+
+interface Flyable {
+  + fly()
+}
+
+interface Walkable {
+  + walk()
+}
+
+interface Swimmable {
+  + swim()
+}
+
+class Duck {
+  + __init__(name)
+  + fly()
+  + walk()
+  + swim()
+}
+
+Animal --|> Duck
+Flyable <|.. Duck
+Walkable <|.. Duck
+Swimmable <|.. Duck
+
+@enduml
