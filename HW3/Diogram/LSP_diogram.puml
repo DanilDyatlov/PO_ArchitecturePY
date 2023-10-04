@@ -1,0 +1,51 @@
+@startuml Car
+
+abstract class Car {
+  + name: String
+  {abstract} + start(): String
+  {abstract} + stop(): String
+}
+
+class RegularCar {
+  + start(): String
+  + stop(): String
+}
+
+class SportsCar {
+  + start(): String
+  + stop(): String
+}
+
+Car <|-- RegularCar
+Car <|-- SportsCar
+
+@enduml
+
+___________________________________-
+
+@startuml Shape
+
+abstract class Shape {
+  {abstract} + calculate_area(): double
+}
+
+class Rectangle {
+  - width: double
+  - height: double
+  + __init__(width: double, height: double)
+  + calculate_area(): double
+}
+
+class Square {
+  - side: double
+  + __init__(side: double)
+  + calculate_area(): double
+}
+
+Shape <|-- Rectangle
+Shape <|-- Square
+
+Shape "*" --* "1" Rectangle: has 
+Shape "*" --* "1" Square: has
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml Notification
+
+abstract class Notification {
+  {abstract} + send_notification(message: String): void
+}
+
+class EmailSender {
+  + send_notification(message: String): void
+}
+
+class User {
+  - username: String
+  - email: String
+  - notification_service: Notification
+  + __init__(username: String, email: String, notification: Notification)
+  + send_notification(message: String): void
+}
+
+Notification <|-- EmailSender: inheritance
+Notification <|.. User: implement
+
+@enduml

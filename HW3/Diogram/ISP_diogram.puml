@@ -1,0 +1,30 @@
+@startuml Printer
+
+abstract class Printer {
+  {abstract} + print(): void
+}
+
+abstract class Fax {
+  {abstract} + fax(): void
+}
+
+abstract class Scanner {
+  {abstract} + scan(): void
+}
+
+class OldPrinter {
+  + print(): void
+}
+
+class NewPrinter {
+  + print(): void
+  + fax(): void
+  + scan(): void
+}
+
+Printer "1" <|.. "*" OldPrinter: implement
+Printer "1" <|.. "*" NewPrinter: implement
+Fax "1" <|.. "*" NewPrinter: implement
+Scanner "1" <|.. "*" NewPrinter: implement
+
+@enduml

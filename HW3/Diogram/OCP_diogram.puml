@@ -1,0 +1,34 @@
+@startuml Shape
+
+abstract class Shape {
+  + calculate_area(): float
+}
+
+class Rectangle {
+  - width: float
+  - height: float
+  + __init__(width: float, height: float)
+  + calculate_area(): float
+}
+
+class Circle {
+  - radius: float
+  + __init__(radius: float)
+  + calculate_area(): float
+}
+
+class AreaCalculator {
+  + calculate_total_area(shapes: List[Shape]): float
+}
+
+' Наследование
+Shape <|-- Rectangle
+Shape <|-- Circle
+
+' Композиция формы к фигуре. Один ко многим 
+Rectangle "1" *-- "1..*" Shape
+Circle "1" *-- "1..*" Shape
+AreaCalculator -- Shape
+
+
+@enduml
