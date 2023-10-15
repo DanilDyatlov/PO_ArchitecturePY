@@ -1,0 +1,53 @@
+@startuml MVI
+interface MVI.view.BaseView {
+~ void render(ViewState)
+}
+class MVI.model.TaskCompletedIntent {
+~ int taskId
++ int getTaskId()
+}
+interface MVI.model.Intent {
+}
+class MVI.presenter.TasksPresenter {
+- List<Task> tasks
+- BaseView view
++ void dispatch(Intent)
++ void loadTasks()
+}
+class MVI.main.MVIPatternDemo {
++ {static} void main(String[])
+}
+class MVI.model.Task {
+- String name
+- boolean completed
++ void complete()
++ boolean isCompleted()
++ String toString()
+}
+interface MVI.model.ViewState {
+}
+class MVI.view.ConsoleView {
++ void render(ViewState)
+}
+class MVI.model.TasksViewState {
+- List<Task> tasks
++ String toString()
+}
+
+
+MVI.model.Intent <|.. MVI.model.TaskCompletedIntent : Implementation
+MVI.view.BaseView <|.. MVI.view.ConsoleView : Implementation
+MVI.model.ViewState <|.. MVI.model.TasksViewState : Implementation
+
+MVIPatternDemo ..> ConsoleView : Creates
+MVIPatternDemo ..> TasksPresenter : Creates
+TasksPresenter "1" *.. "1..*" Task : Creates
+MVIPatternDemo "1" *.. "1..*" TaskCompletedIntent: Creates
+TasksPresenter "1" *.. "1..*" TasksViewState : Creates
+
+'TasksPresenter "1" *.. "1..*" Task : creates. Это ассоциация. Связь между классами
+'TasksPresenter один, а Task много
+
+'MVIPatternDemo ..> ConsoleView : Creates. Это зависимость
+
+@enduml
